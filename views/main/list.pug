@@ -1,0 +1,15 @@
+extends ../base
+
+
+block content
+    h1 Main
+
+    ul
+        each main in mains
+            li
+                p #{main.clientId}
+                p #{main.date}
+                p #{main.SYS}
+                p #{main.DIA}
+                p #{main.pulse}
+                
