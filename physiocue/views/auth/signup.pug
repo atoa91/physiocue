@@ -1,0 +1,20 @@
+extends ../base
+
+block content
+    h1 Signup
+
+    form(action="/signup/" method="POST")
+        input(type="text" name="clientId" placeholder="clientId" required)
+        input(type="email" name="email" placeholder="email" required)
+        input(type="text" name="age" placeholder="age" required)
+        input(type="text" name="sex" placeholder="sex" required)
+        input(type="text" name="weight" placeholder="weight" required)
+        input(type="text" name="height" placeholder="height" required)
+        input(type="text" name="arm" placeholder="arm" required)
+        input(type="text" name="medication" placeholder="medication" required)
+
+
+        input(type="password" name="password" placeholder="password" required)
+        input(type="password" name="password_confirmation" placeholder="password confirmation" required)
+
+        input(type="submit" value="submit")
