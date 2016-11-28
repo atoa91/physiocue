@@ -37,8 +37,10 @@ router
     return res.render("main/new", {});
 })
 
+var flag = 0;
+var time2;
 
-
+//measure after send push within 24h
 router.route("/:cid/measure/")
     .post(function(req, res, next){
        var measure = new Main({
@@ -49,13 +51,21 @@ router.route("/:cid/measure/")
             status : req.body.statuss,
         });
         
+        clearTimeout(time2);
+
+            time2=setTimeout(function(){
+                Client.pushAlert(req.cid,function(error,result){
+                if(error) console.log(error);
+                console.log(result);
+                });
+            },3*1000); //24*60*60*1000
+        
         measure.save(function(error){
             if(error)return next(error);
-            req.flash("singup","success!");
             var message =str2json.convert({"success":"measure"});
-            
             return res.json(message);
         }); 
+
     });
 
 module.exports =router;

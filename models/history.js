@@ -2,7 +2,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var express = require('express');
 
-
+var Client = require('./client');
 
 var historySchema = new Schema({
     clientId:String,
@@ -28,6 +28,15 @@ historySchema.pre("save", function(next){
   // make numbering for checking number of recent one
     return next();
 });
+
+// historySchema.post("save", function(result,next){
+//   setTimeout(function(){
+//                 Client.pushAlert(this.clientId,function(error,result){
+//                 if(error) return next(error);
+//                 return next(null,result);
+//             });
+//             },10000);
+// });
 
 historySchema.statics.weekly = function (id,next){
     History.find({clientId: id})

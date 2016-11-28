@@ -3,18 +3,17 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var session = require("express-session");
+var session = require("cookie-session");
 var flash = require("connect-flash");
 var mongoose = require("mongoose");
 var messages = require("express-messages");
 var bodyParser = require('body-parser');
 var passport = require('passport');
-//var toJSON = require("utils-error-to-json");
 var str2json = require("string-to-json");
 //Routers
 var index = require('./routes/index');
 var users = require('./routes/users');
-
+var hat = require('hat');
 var historyRouter = require("./routes/history");
 var authRouter = require("./routes/auth");
 var homeRouter = require("./routes/home");
@@ -49,9 +48,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret: "physiocue",
-  resave: true,
-  saveUninitialized: true
+  name: "session",
+  keys:['physiocue']
+  // resave: true,
+  // saveUninitialized: true
 }));
 
 app.use(flash());
@@ -63,11 +63,15 @@ app.use(function(req, res, next) {
 app.use(passport.initialize());
 app.use(passport.session());  // function (req, res, next){...}
 require("./config/passport")(passport); //code split middleware "passport"
-
+var match = hat().substring(0,6);
 app.use(function(req, res, next){
   res.locals.user = req.user;
+  res.locals.match = match;
   next();
 });
+
+
+
 
 //rotuer
 app.use("/", homeRouter);
@@ -90,14 +94,14 @@ app.get('/favicon.ico', function(req, res) {
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  var errorJson = str2json.convert({"error":err.message});
+  var errorJson = str2json.convert({"error":err.message,"status":err.status});
   res.json(errorJson);
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  //// render the error page
+  // res.status(err.status || 500);
+  // res.render('error');
 });
 
 

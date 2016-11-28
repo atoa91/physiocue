@@ -1,6 +1,10 @@
 var mongoose = require("mongoose");
 var bcrypt = require("bcrypt");
 var Schema = mongoose.Schema;
+var hat = require('hat');
+
+var FCM = require("fcm-node");
+var serverKey='AIzaSyAlyWtNvd9xtarOkl8U53P1IMLb-dqhM1g';
 
 var clientSchema = new Schema({
     clientId:{
@@ -8,26 +12,35 @@ var clientSchema = new Schema({
     unique: true
     },
     password:String,
-    email : String,
+    email : {
+      type:String,
+      unique: true
+    },
     age : Number,
     sex : Boolean,
     weight : Number,
     height : Number,
     arm : Number,
-    medication : String
+    medication : String,
+    token:String,
+    pushToken:String
 });
 
 clientSchema.pre("save", function(next){
   var client=this;
+  var id=hat();
   bcrypt.hash(this.password, 10, function(error, hash){
     if(error) return next(error);
     
     var newPassword = hash;
     client.password = newPassword;
+    client.token =id.substring(0,6);
     
     return next();
   });
 });
+
+
 
 // client.authenticate using avaliable
 // next => function(error, client){...}
@@ -57,8 +70,7 @@ clientSchema.statics.authenticate = function() {
   };
 };
 
-clientSchema.statics.pwdCheck =function(username, password, callback) {
-
+clientSchema.statics.pwdCheck=function(username, password, callback) {
     Client.findOne({clientId: username})
       .exec(function(error, user) {
         if (error) return callback(error);
@@ -75,9 +87,11 @@ clientSchema.statics.pwdCheck =function(username, password, callback) {
           if(error) return callback(error);
   
           var newPassword = hash;
+          var id2=hat();
          
           Client.update({clientId:username},{
-            password : newPassword
+            password : newPassword,
+            token:id2.substring(0,6)
           },function(err, numAffected){
             if(err) return callback(error);
 
@@ -101,11 +115,11 @@ clientSchema.statics.infoChange =function(username, email, weight,height,arm,med
           return callback(error);
         }
 
-        if(email.length==0) email = user.email;
-        if(weight.length==0) weight = user.weight;
-        if(height.length==0) height = user.height;
-        if(arm.length==0) arm = user.arm;
-        if(medication.length==0) medication = user.medication;
+        if(!email) email = user.email;
+        if(!weight) weight = user.weight;
+        if(!height) height = user.height;
+        if(!arm) arm = user.arm;
+        if(!medication) medication = user.medication;
         
         Client.update({clientId:username},{
           email:email,
@@ -123,7 +137,53 @@ clientSchema.statics.infoChange =function(username, email, weight,height,arm,med
 };  
 
 
+clientSchema.statics.updateToken = function(id, token, callback){
+  //find client one
+  if(!token)return callback('token missing');
+  Client.update({clientId: id},{$set:{pushToken:token}},function(err, numAffected){
+            if(err) return callback(err);
+            return callback(null,numAffected);
+  });
+};
 
+
+
+clientSchema.statics.pushAlert = function(id, callback){
+  Client.findOne({clientId:id})
+  .exec(function(error, user){
+    if (error) return callback(error);
+    if (!user) {
+          var error = new Error("User not found.");
+          error.status = 401;
+          return callback(error);
+        }
+        
+        var fcm = new FCM(serverKey);
+        var message = {
+            to: user.pushToken,
+            collapse_key:'physiocue-push',
+            
+            notification:{
+                title:'Time to check your blood pressure',
+                body: 'Time to check your blood pressure'
+            },
+            
+            data:{
+                my_key: 'value',
+                my_another_key: 'my another value'
+            }
+        };
+
+        fcm.send(message, function(err, response){
+            if(err){
+                return callback(err);
+            } else{
+                return callback(null,"Successfully sent with response: "+ response);
+            }
+        });
+    
+  });
+}
 
 
 clientSchema.statics.serialize = function() {

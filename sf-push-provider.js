@@ -1,31 +1,27 @@
-var gcm = require('node-gcm');
+var FCM = require("fcm-node");
 
-// create a message with default values
-var message = new gcm.Message();
+var serverKey='AIzaSyAlyWtNvd9xtarOkl8U53P1IMLb-dqhM1g';
+var fcm = new FCM(serverKey);
 
-// or with object values
-var message = new gcm.Message({
-    collapseKey: 'demo',
-    delayWhileIdle: true,
-    timeToLive: 3,
-    data: {
-        key1: '안녕하세요.',
-        key2: 'saltfactory push demo'
+var message = {
+    to:'to user',
+    collapse_key:'physiocue-push',
+    
+    notification:{
+        title:'ggggggggggg',
+        body: 'gggggggggggg'
+    },
+    
+    data:{
+        my_key: 'my value',
+        my_another_key: 'my another value'
     }
-});
+};
 
-var server_access_key = 'AIzaSyCVgXTZ6c5WUtqnUM-oYaedEZRhaocsG5M';
-var sender = new gcm.Sender(server_access_key);
-var registrationIds = [];
-
-var registration_id = '안드로이드 registration_id 값';
-// At least one required
-registrationIds.push(registration_id);
-
-/**
- * Params: message-literal, registrationIds-array, No. of retries, callback-function
- **/
-sender.send(message, registrationIds, 4, function (err, result) {
-    if(err) console.log(err);
-    console.log(result);
+fcm.send(message, function(err, response){
+    if(err){
+        console.log(err);
+    } else{
+        console.log("Successfully sent with response: ", response);
+    }
 });

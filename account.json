@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "physiocue-push-150502",
+  "private_key_id": "88a90ddd8ab711160fcfd82b6960ed5e1e786401",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDhs6Pgo7gSrh58\n9u9xiJWjAtQX9LaGb72VFSpthjhbDZxgJVUSV61HMPT290Dy+iv9RWsWVaJ4Yps+\nlU4Kc4jKzwMwPqSEaXXyNNPD1yRYgXdI1yKbNE1lfCwSDzXZmSSHmZGXpLKDbHRL\nPH6wL+7Idf/hybFtgQkSzkECbQcFStMQ91X2dUFJ/8qK+nRW2V4McUP7GE1qQ+K/\n8+qE5mmT9uh4Az5UHUYSe63j9WP9vIqNaz1iL+zpb/W1ed2q5pwnEm4Rl/UV2LOU\nhIKwEHuu36CYi8r5caiJRauV73umlfm3T14R2eScA74wP2G2tlHqOFFHjf5TMc0Z\nf+zEI3l/AgMBAAECggEALKLbWRTn1YHr86jeZ+SsO0XW7jnuUx4ML0y1TF3MDW3e\nrEEV1v/R/A9ZkvIJPURuqLMu34bmD8roivL6MSTyO7G/Hq502N8GfXUnIEcPIBXS\nomwxouIwIE7zZErvym34BH1Bhu0ChO1Q/oQjRfLk1W5Iwb2iwlZPlhGGV9V6Gvh3\nHdzCKNHVbWSa/gNpvJ87nE7y+DZCGHy9yULMRmSXZemsDzATBP/DPe31EZXAd8tp\nSDzNAb4xLuz9z+VHv7PlR/A2vHD4RGUkyPok7O/I2pKnTETam4TbmyaiS6hEM79p\nvZwCubX2tI/J4eQYdd2rt+giBWQCRHDGbtwcbM0dIQKBgQD8mv5S9iISqFe05/yA\nAjVYLEYfYrDQ0GOVUtTAvQkrAyoUybBuLhyJkmX9B5p/6YN8A6E4omJRPX4JZCQn\nHiXucMJvWB7Pm/Ot0pB3ATJEO397ZftEy3cdYA7fRLth5mk0al7pxlUCKuMMVzIZ\nJug8X7aa1idrYPmWtRWTYZln8QKBgQDkvBfc/ONnNxikHLuN+jLrwN75tiVF/jej\ncbtoQErKap5zZRUBn+nwMj1pSkaqDtA2x3Ot/VhYMq/M0PKlcf8N59HjQcPLFfae\nGVr5E1SIWJUaDyWhkVHh7e9UATLW2hOoJZROfvpg3HzJmHb3lMKTwwnhoRmg8O9U\n6mY3KD3obwKBgCD4cf2OFsBsrJX2OaTTpPbPQI/UJ9P5fyX8W7yUb9/nV9TCxn57\nEkp6i0lNdsL/TaQgLSjhOQf1iL/dDEL20mie2yIBVHQwnMuxUh3WUCNLyMXod7Vx\nASkaYpaNuA99LXoj8CN/OZVA18XCk81ooKNQstre3OJNFAaxuBE2iflhAoGBAIO+\nPnRfB89kMYIctn4Q9JFLFmJ3YcKNqJgwIoPqO+mYPUkzmETGSWS6Wxqw2ECMpapX\neK5m9CJgl1b9pjRak0/8DKy7LT1kmhX3fqllU9PwSXin7sG/RI0/kRAuXIzZMGcx\ntdj8U9PESu+GLEdvXB7lQGS/eFZ1TzP2igcM25NrAoGBAK4tQAWUxiYZYhdN0elo\n9s17Cf03ry/+F9I7aF/HaU4b6Go8ucrCokPFl3SoVaZcEbgiGKntUPN8ay7ckTIt\nGphyaE8MriN33Hw3XokFbahO0zavBFmlmZr/tuaES6dYOdyn+Wf9jm26qe7b0tLg\nWm02nlyp+4E5T90GNkISou++\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-ju4yd@physiocue-push-150502.iam.gserviceaccount.com",
+  "client_id": "106870876135302809917",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-ju4yd%40physiocue-push-150502.iam.gserviceaccount.com"
+}
